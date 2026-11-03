@@ -564,3 +564,97 @@ time {
   #petals, #confetti { display: none; }
   .car-rig { left: 50% !important; transform: translateX(-50%) !important; }
 }
+
+.route-open {
+  position: fixed;
+  left: 0.85rem;
+  bottom: 0.7rem;
+  z-index: 20;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 213, 106, 0.55);
+  background: rgba(61, 7, 22, 0.82);
+  color: #fff6ea;
+  font: 600 0.72rem/1 "Poppins", system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.route-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(28, 6, 12, 0.72);
+  backdrop-filter: blur(8px);
+}
+
+.route-overlay.hidden { display: none; }
+
+.route-card {
+  width: min(920px, 100%);
+  padding: 1rem 1rem 0.8rem;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(90, 18, 36, 0.96), rgba(40, 8, 16, 0.96));
+  border: 1px solid rgba(255, 213, 106, 0.35);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  text-align: center;
+  position: relative;
+}
+
+.route-close {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  border: 0;
+  background: transparent;
+  color: #ffd56a;
+  font: 600 0.75rem/1 "Poppins", system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.route-kicker {
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 0.62rem;
+  color: #ff9a2f;
+}
+
+.route-card h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  margin: 0.15rem 0;
+}
+
+.route-stats {
+  font-size: 0.82rem;
+  opacity: 0.8;
+  margin-bottom: 0.55rem;
+}
+
+.route-stage {
+  position: relative;
+  width: 100%;
+}
+
+#routeLottie {
+  width: 100%;
+  aspect-ratio: 960 / 520;
+}
+
+#routeLottie svg { display: block; width: 100%; height: auto; }
+
+.route-pin {
+  position: absolute;
+  transform: translate(-50%, 8px);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #fff6ea;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.route-pin-end { color: #ffd56a; }
