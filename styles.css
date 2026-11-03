@@ -24,6 +24,7 @@
   --dev: "Tiro Devanagari Hindi", serif;
   --ui: "Poppins", system-ui, sans-serif;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --footer: calc(2.4rem + env(safe-area-inset-bottom, 0px));
 }
 
 html,
@@ -223,8 +224,8 @@ body.loaded .reveal {
 
 .audio-toggle {
   position: fixed;
-  top: 0.85rem;
-  right: 1rem;
+  top: max(0.85rem, env(safe-area-inset-top, 0px));
+  right: max(0.7rem, env(safe-area-inset-right, 0px));
   z-index: 20;
   display: inline-flex;
   gap: 0.35rem;
@@ -244,12 +245,14 @@ body.loaded .reveal {
 .page {
   position: relative;
   z-index: 4;
-  height: calc(100dvh - 2.6rem);
+  height: calc(100dvh - var(--footer));
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 2.6rem 2.2rem 0.2rem;
+  padding-left: max(2.2rem, calc(env(safe-area-inset-left, 0px) + 1.4rem));
+  padding-right: max(2.2rem, calc(env(safe-area-inset-right, 0px) + 1.4rem));
   gap: 0.35rem;
   text-align: center;
 }
@@ -511,7 +514,8 @@ time {
   right: 0;
   bottom: 0;
   z-index: 5;
-  height: 2.4rem;
+  min-height: var(--footer);
+  padding: 0.35rem 0.8rem env(safe-area-inset-bottom, 0px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -520,6 +524,11 @@ time {
   border-top: 1px solid rgba(255, 213, 106, 0.25);
   font-size: clamp(0.68rem, 2vw, 0.82rem);
   letter-spacing: 0.04em;
+}
+
+.wishes p {
+  max-width: 36rem;
+  line-height: 1.35;
 }
 
 .wish-ornament {
@@ -541,27 +550,6 @@ time {
 }
 
 .celebration.hidden { display: none; }
-
-@media (max-width: 720px) {
-  .stage { grid-template-columns: 1fr; gap: 0.35rem; }
-  .king-frame { height: min(32dvh, 260px); width: min(86vw, 340px); margin: 0 auto; }
-  .garland, .pillar { display: none; }
-  .page { padding-inline: 0.8rem; }
-  .lane { height: min(32dvh, 220px); }
-  .cracker { width: 210px; height: 210px; }
-  .cracker-b { left: 18%; top: -6.5rem; }
-  .cracker-c { width: 180px; height: 180px; }
-}
-
-@media (max-width: 520px) {
-  .sep { display: none; }
-  .countdown {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.35rem;
-  }
-  .unit:last-child { grid-column: span 2; }
-}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -638,4 +626,130 @@ time {
   left: -1rem;
   width: min(32vw, 320px);
   height: min(32vw, 320px);
+}
+
+@media (max-width: 980px) {
+  .page { padding-top: 2.3rem; gap: 0.25rem; }
+  .stage { gap: 0.8rem; }
+  .king-frame { height: min(40dvh, 360px); }
+  .unit { min-width: 3.5rem; }
+  .digit { font-size: clamp(1.7rem, 4.4vw, 2.7rem); padding: 0.4rem 0.28rem; }
+  .lane { height: min(28dvh, 220px); }
+  .route-stage { height: min(18dvh, 140px); width: min(100%, calc(min(18dvh, 140px) * 960 / 520)); }
+}
+
+@media (max-width: 760px) {
+  .page {
+    justify-content: flex-start;
+    overflow: hidden;
+    padding: 2.15rem 0.85rem 0.1rem;
+    padding-left: max(0.85rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.85rem, env(safe-area-inset-right, 0px));
+    gap: 0.2rem;
+  }
+
+  .devanagari { font-size: 1.05rem; }
+
+  .stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 0;
+    gap: 0.3rem;
+  }
+
+  .ceremony { display: contents; }
+
+  .king-portrait { order: 1; }
+  .hero { order: 2; }
+  .countdown-shell { order: 3; width: min(100%, 26rem); }
+  .route-inline { order: 4; width: min(100%, 28rem); }
+
+  .king-frame {
+    height: min(22dvh, 200px);
+    width: min(72vw, 280px);
+    margin: 0 auto;
+    animation: none;
+  }
+
+  h1 { font-size: clamp(1.45rem, 7.4vw, 2.1rem); }
+  .eyebrow { letter-spacing: 0.12em; font-size: 0.55rem; }
+  time { font-size: 0.92rem; }
+
+  .countdown { width: 100%; gap: 0.3rem; }
+  .unit { min-width: 0; flex: 1 1 0; }
+  .digit {
+    font-size: clamp(1.28rem, 7.6vw, 2rem);
+    padding: 0.32rem 0.12rem;
+    border-radius: 10px;
+  }
+  .label { font-size: 0.48rem; letter-spacing: 0.06em; }
+  .sep { font-size: 1rem; margin-top: -0.35rem; }
+  .countdown-shell { padding: 0.4rem 0.4rem; }
+
+  .route-kicker { font-size: 0.5rem; letter-spacing: 0.14em; }
+  .route-stats { font-size: 0.62rem; }
+  .route-stage {
+    height: min(15dvh, 118px);
+    width: min(100%, calc(min(15dvh, 118px) * 960 / 520));
+  }
+  .route-pin { font-size: 0.56rem; }
+  .route-pin-mid { display: none; }
+
+  .baraat { flex: 1 1 auto; min-height: 108px; width: 100%; }
+  .lane { height: 100%; min-height: 108px; max-height: 180px; }
+
+  .garland, .pillar { display: none; }
+  .roof { left: 8%; right: 8%; }
+  .cracker,
+  .cracker-c { width: 140px; height: 140px; }
+  .cracker-a { left: -5.5rem; top: -1rem; }
+  .cracker-b { left: auto; right: -4.5rem; top: -4rem; }
+  .cracker-c { bottom: 2.4rem; left: -3rem; }
+}
+
+@media (max-width: 420px) {
+  .audio-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .audio-toggle { padding: 0.45rem 0.5rem; }
+  .wishes { gap: 0.35rem; }
+  .wish-ornament { display: none; }
+}
+
+@media (max-height: 700px) {
+  html, body { overflow-x: hidden; overflow-y: auto; height: auto; }
+  .page {
+    height: auto;
+    min-height: calc(100dvh - var(--footer));
+    overflow: visible;
+  }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .page { padding-top: 1.6rem; }
+  .stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(140px, 220px);
+    align-items: center;
+  }
+  .ceremony { display: flex; }
+  .king-portrait,
+  .hero,
+  .countdown-shell,
+  .route-inline { order: initial; width: auto; }
+  .king-frame { height: min(52dvh, 210px); width: 100%; }
+  .route-pin-mid { display: none; }
+  .route-stage { height: min(22dvh, 110px); }
+  .lane { height: min(26dvh, 130px); max-height: none; }
+  .baraat { min-height: 0; }
 }

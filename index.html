@@ -11,7 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Poppins:wght@400;500;600&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=2" />
   </head>
   <body>
     <div class="scene" aria-hidden="true">
@@ -51,9 +51,11 @@
       <div class="garland garland-r"></div>
     </div>
 
+    <audio id="baraatTrack" src="assets/sound.mp3" loop preload="none"></audio>
+
     <button type="button" class="audio-toggle" id="audioToggle" aria-pressed="false">
       <span class="audio-icon" aria-hidden="true">🔇</span>
-      <span class="audio-label">Dhol &amp; Shehnai</span>
+      <span class="audio-label">Tap for music</span>
     </button>
 
     <div class="cracker cracker-a" data-cracker aria-hidden="true"></div>
@@ -96,10 +98,10 @@
             <div class="route-stage">
               <div id="routeLottie"></div>
               <span class="route-pin" style="left: 12.3%; top: 82.1%">Pune</span>
-              <span class="route-pin route-pin-above" style="left: 26.3%; top: 77.7%">Ahmednagar</span>
-              <span class="route-pin" style="left: 28%; top: 62.6%">Dhule</span>
+              <span class="route-pin route-pin-mid route-pin-above" style="left: 26.3%; top: 77.7%">Ahmednagar</span>
+              <span class="route-pin route-pin-mid" style="left: 28%; top: 62.6%">Dhule</span>
               <span class="route-pin" style="left: 45.4%; top: 47.9%">Indore</span>
-              <span class="route-pin" style="left: 78.1%; top: 25.3%">Shivpuri</span>
+              <span class="route-pin route-pin-mid" style="left: 78.1%; top: 25.3%">Shivpuri</span>
               <span class="route-pin route-pin-end" style="left: 84.8%; top: 18.7%">Gwalior</span>
             </div>
           </section>
@@ -133,7 +135,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.12.2/build/player/lottie.min.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js?v=2"></script>
     <script src="route.js"></script>
   </body>
 </html>

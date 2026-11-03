@@ -26,9 +26,8 @@ const confettiState = { pieces: [], intensity: 1.2, canvas: null, ctx: null, w: 
 const audio = {
   ctx: null,
   master: null,
+  track: null,
   muted: true,
-  dholTimer: null,
-  shehnaiNodes: [],
 };
 
 function pad2(n) {
@@ -47,16 +46,18 @@ function setDigit(el, value) {
   el.classList.remove("flip-in", "flip-out");
   el.classList.add("flip-out");
 
-  el.addEventListener(
-    "animationend",
-    () => {
-      el.textContent = next;
-      el.dataset.value = next;
-      el.classList.remove("flip-out");
-      el.classList.add("flip-in");
-    },
-    { once: true }
-  );
+  let done = false;
+  const commit = () => {
+    if (done) return;
+    done = true;
+    el.textContent = next;
+    el.dataset.value = next;
+    el.classList.remove("flip-out");
+    el.classList.add("flip-in");
+  };
+
+  el.addEventListener("animationend", commit, { once: true });
+  window.setTimeout(commit, 420);
 }
 
 function updateCountdown() {
@@ -95,18 +96,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function initAudioToggle() {
   if (!els.audioToggle) return;
+  syncAudioUi();
 
   els.audioToggle.addEventListener("click", () => {
-    ensureAudioContext();
+    const track = ensureTrack();
     audio.muted = !audio.muted;
     syncAudioUi();
     if (!audio.muted) {
       document.body.classList.add("audio-on");
-      startFestiveLoop();
+      const played = track.play();
+      if (played && typeof played.catch === "function") {
+        played.catch(() => {
+          audio.muted = true;
+          syncAudioUi();
+        });
+      }
     } else {
-      stopFestiveLoop();
+      track.pause();
     }
   });
+}
+
+function ensureTrack() {
+  if (audio.track) return audio.track;
+  const track = document.getElementById("baraatTrack");
+  track.volume = 0.9;
+  audio.track = track;
+  return track;
 }
 
 function syncAudioUi() {
@@ -126,80 +142,6 @@ function ensureAudioContext() {
   audio.master = audio.ctx.createGain();
   audio.master.gain.value = 0.22;
   audio.master.connect(audio.ctx.destination);
-}
-
-function startFestiveLoop() {
-  if (!audio.ctx || audio.muted) return;
-  stopFestiveLoop();
-  startShehnaiDrone();
-  audio.dholTimer = window.setInterval(() => playDholHit(), 480);
-  playDholHit();
-}
-
-function stopFestiveLoop() {
-  if (audio.dholTimer) {
-    clearInterval(audio.dholTimer);
-    audio.dholTimer = null;
-  }
-  audio.shehnaiNodes.forEach((n) => {
-    try {
-      n.osc.stop();
-      n.lfo.stop();
-    } catch {
-      /* already stopped */
-    }
-  });
-  audio.shehnaiNodes = [];
-}
-
-function startShehnaiDrone() {
-  const { ctx, master } = audio;
-  if (!ctx || !master) return;
-
-  const notes = [392, 440, 494, 523.25];
-  notes.forEach((freq, i) => {
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    const filter = ctx.createBiquadFilter();
-    const lfo = ctx.createOscillator();
-    const lfoGain = ctx.createGain();
-
-    osc.type = i % 2 ? "sawtooth" : "triangle";
-    osc.frequency.value = freq;
-    filter.type = "bandpass";
-    filter.frequency.value = freq * 1.5;
-    filter.Q.value = 8;
-    gain.gain.value = 0.015;
-
-    lfo.frequency.value = 0.08 + i * 0.02;
-    lfoGain.gain.value = freq * 0.02;
-    lfo.connect(lfoGain);
-    lfoGain.connect(osc.frequency);
-
-    osc.connect(filter);
-    filter.connect(gain);
-    gain.connect(master);
-    osc.start();
-    lfo.start();
-    audio.shehnaiNodes.push({ osc, lfo });
-  });
-}
-
-function playDholHit() {
-  if (!audio.ctx || !audio.master || audio.muted) return;
-  const t = audio.ctx.currentTime;
-  const osc = audio.ctx.createOscillator();
-  const gain = audio.ctx.createGain();
-  osc.type = "sine";
-  osc.frequency.setValueAtTime(110, t);
-  osc.frequency.exponentialRampToValueAtTime(55, t + 0.12);
-  gain.gain.setValueAtTime(0.0001, t);
-  gain.gain.exponentialRampToValueAtTime(0.35, t + 0.008);
-  gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.22);
-  osc.connect(gain);
-  gain.connect(audio.master);
-  osc.start(t);
-  osc.stop(t + 0.25);
 }
 
 function playHonk() {
