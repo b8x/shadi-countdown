@@ -264,11 +264,14 @@ body.loaded .reveal {
 
 .stage {
   display: grid;
-  grid-template-columns: minmax(220px, 380px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.15fr) minmax(220px, 380px);
   align-items: center;
   gap: clamp(0.8rem, 2.5vw, 1.8rem);
   width: min(1080px, 100%);
 }
+
+.ceremony { order: 1; }
+.king-portrait { order: 2; }
 
 .king-portrait { margin: 0; position: relative; }
 
@@ -377,19 +380,19 @@ time {
 .countdown {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.55rem;
 }
 
-.unit { display: flex; flex-direction: column; gap: 0.2rem; min-width: 3.4rem; }
+.unit { display: flex; flex-direction: column; gap: 0.28rem; min-width: 4.6rem; }
 
 .digit {
   display: block;
   font-variant-numeric: tabular-nums;
-  font-size: clamp(1.45rem, 4vw, 2.1rem);
+  font-size: clamp(2.15rem, 5.6vw, 3.35rem);
   font-weight: 600;
   line-height: 1;
-  padding: 0.35rem 0.3rem;
-  border-radius: 10px;
+  padding: 0.5rem 0.45rem;
+  border-radius: 12px;
   background: linear-gradient(160deg, rgba(255, 213, 106, 0.16), rgba(0, 0, 0, 0.2));
   border: 1px solid rgba(255, 213, 106, 0.22);
 }
@@ -407,7 +410,7 @@ time {
 @keyframes inn { from { transform: rotateX(70deg); opacity: 0; } to { transform: none; opacity: 1; } }
 
 .label {
-  font-size: 0.52rem;
+  font-size: 0.64rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   opacity: 0.6;
@@ -615,3 +618,15 @@ time {
 .route-pin-end { color: #ffd56a; }
 
 .route-pin-above { transform: translate(-10%, -130%); }
+
+.cracker {
+  position: fixed;
+  width: min(28vw, 220px);
+  height: min(28vw, 220px);
+  pointer-events: none;
+  z-index: 6;
+}
+
+.cracker-a { top: 4%; left: 2%; }
+.cracker-b { top: 6%; right: 4%; }
+.cracker-c { bottom: 14%; left: 38%; }
