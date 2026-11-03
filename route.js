@@ -8,7 +8,7 @@
     renderer: "svg",
     loop: !reduce,
     autoplay: !reduce,
-    path: "assets/pune-gwalior.json",
+    path: "assets/pune-gwalior.json?v=2",
   });
 
   if (reduce) {
