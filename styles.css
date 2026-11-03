@@ -264,16 +264,17 @@ body.loaded .reveal {
 
 .stage {
   display: grid;
-  grid-template-columns: minmax(130px, 210px) minmax(0, 1fr);
+  grid-template-columns: minmax(220px, 380px) minmax(0, 1fr);
   align-items: center;
-  gap: clamp(0.6rem, 2vw, 1.4rem);
-  width: min(860px, 100%);
+  gap: clamp(0.8rem, 2.5vw, 1.8rem);
+  width: min(1080px, 100%);
 }
 
 .king-portrait { margin: 0; position: relative; }
 
 .king-frame {
-  height: min(28dvh, 230px);
+  height: min(48dvh, 440px);
+  width: 100%;
   padding: 3px;
   border-radius: 16px;
   background: linear-gradient(145deg, #ffe7a3, #ff9a2f, #7a1230, #ffd56a);
@@ -421,40 +422,44 @@ time {
 
 .baraat {
   position: relative;
-  width: min(100%, 760px);
+  width: 100%;
   flex: 1;
-  min-height: 0;
+  min-height: 140px;
   display: flex;
   align-items: flex-end;
 }
 
 .road {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 8%;
-  height: 22%;
-  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.35));
-  border-top: 2px dashed rgba(255, 213, 106, 0.3);
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  top: 82%;
+  bottom: 0;
+  z-index: 0;
+  background: linear-gradient(180deg, rgba(55, 16, 18, 0.2), rgba(12, 4, 8, 0.82));
+  border-top: 3px solid rgba(255, 213, 106, 0.7);
+  box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.25);
 }
 
 .road span {
   position: absolute;
-  top: 48%;
   left: 0;
   right: 0;
-  height: 3px;
-  background: repeating-linear-gradient(90deg, rgba(255, 246, 234, 0.75) 0 22px, transparent 22px 42px);
-  animation: drive 0.9s linear infinite;
+  top: 46%;
+  height: 4px;
+  background: repeating-linear-gradient(90deg, rgba(255, 246, 234, 0.92) 0 28px, transparent 28px 52px);
+  animation: drive 0.8s linear infinite;
 }
 
-@keyframes drive { to { background-position: -42px 0; } }
+@keyframes drive { to { background-position: -52px 0; } }
 
 .lane {
   position: relative;
   width: 100%;
-  height: min(36dvh, 300px);
+  height: min(34dvh, 280px);
   overflow: hidden;
+  z-index: 1;
 }
 
 .car-rig {
@@ -463,6 +468,7 @@ time {
   left: 0;
   height: 100%;
   width: auto;
+  z-index: 2;
   filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.45));
   will-change: transform;
 }
@@ -535,7 +541,7 @@ time {
 
 @media (max-width: 720px) {
   .stage { grid-template-columns: 1fr; gap: 0.35rem; }
-  .king-frame { height: min(20dvh, 150px); width: min(70vw, 240px); margin: 0 auto; }
+  .king-frame { height: min(32dvh, 260px); width: min(86vw, 340px); margin: 0 auto; }
   .garland, .pillar { display: none; }
   .page { padding-inline: 0.8rem; }
   .lane { height: min(32dvh, 220px); }
