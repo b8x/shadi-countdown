@@ -3,15 +3,13 @@
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduce) return;
   document.querySelectorAll("[data-cracker]").forEach((mount, index) => {
-    const anim = lottie.loadAnimation({
+    lottie.loadAnimation({
       container: mount,
       renderer: "svg",
       loop: true,
-      autoplay: false,
-      path: "assets/crackers.json",
-    });
-    anim.addEventListener("DOMLoaded", () => {
-      window.setTimeout(() => anim.play(), index * 700);
+      autoplay: true,
+      path: "assets/fireworks.json?v=6",
+      rendererSettings: { preserveAspectRatio: "xMidYMid meet" },
     });
   });
 })();

@@ -548,6 +548,9 @@ time {
   .garland, .pillar { display: none; }
   .page { padding-inline: 0.8rem; }
   .lane { height: min(32dvh, 220px); }
+  .cracker { width: 210px; height: 210px; }
+  .cracker-b { left: 18%; top: -6.5rem; }
+  .cracker-c { width: 180px; height: 180px; }
 }
 
 @media (max-width: 520px) {
@@ -621,12 +624,18 @@ time {
 
 .cracker {
   position: fixed;
-  width: min(28vw, 220px);
-  height: min(28vw, 220px);
+  width: min(38vw, 380px);
+  height: min(38vw, 380px);
   pointer-events: none;
-  z-index: 6;
+  z-index: 3;
+  filter: drop-shadow(0 0 8px rgba(255, 186, 48, 0.45));
 }
 
-.cracker-a { top: 4%; left: 2%; }
-.cracker-b { top: 6%; right: 4%; }
-.cracker-c { bottom: 14%; left: 38%; }
+.cracker-a { top: 0.4rem; left: -7rem; }
+.cracker-b { top: -9.5rem; left: 32%; }
+.cracker-c {
+  bottom: -1.5rem;
+  left: -1rem;
+  width: min(32vw, 320px);
+  height: min(32vw, 320px);
+}
