@@ -249,39 +249,50 @@ function playHonk() {
 
 function initBaraatAnimation() {
   if (!els.baraatCar || !window.gsap) return;
+
+  const lane = els.baraatCar.parentElement;
+
+  function positions() {
+    const carW = els.baraatCar.offsetWidth;
+    const laneW = lane.offsetWidth;
+    return {
+      start: -carW - 24,
+      center: Math.max(8, (laneW - carW) / 2),
+      end: laneW + 24,
+    };
+  }
+
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    gsap.set(els.baraatCar, { left: "50%", xPercent: -50 });
+    const { center } = positions();
+    gsap.set(els.baraatCar, { x: center, y: 0, xPercent: 0 });
     return;
   }
 
-  gsap.set(els.baraatCar, { xPercent: -130, y: 0, left: "50%" });
+  const play = () => {
+    const { start, center, end } = positions();
+    gsap.set(els.baraatCar, { x: start, y: 0, xPercent: 0 });
+    const tl = gsap.timeline();
+    tl.to(els.baraatCar, { x: center, duration: 3.2, ease: "power3.out" })
+      .to(els.baraatCar, {
+        y: -12,
+        duration: 0.26,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: 5,
+      })
+      .add(() => playHonk())
+      .to(els.baraatCar, { y: 0, duration: 0.2 })
+      .to({}, { duration: 0.45 })
+      .to(els.baraatCar, { x: end, duration: 2.6, ease: "power2.in" })
+      .call(play);
+  };
 
-  const tl = gsap.timeline({ repeat: -1, repeatDelay: 0.4 });
+  play();
 
-  tl.to(els.baraatCar, {
-    xPercent: -50,
-    duration: 3.8,
-    ease: "power3.out",
-  })
-    .to(els.baraatCar, {
-      y: -10,
-      duration: 0.28,
-      ease: "sine.inOut",
-      yoyo: true,
-      repeat: 5,
-    })
-    .add(() => playHonk(), "-=0.1")
-    .to(els.baraatCar, {
-      y: 0,
-      duration: 0.25,
-    })
-    .to({}, { duration: 0.6 })
-    .to(els.baraatCar, {
-      xPercent: 130,
-      duration: 3.2,
-      ease: "power2.in",
-    })
-    .set(els.baraatCar, { xPercent: -130, y: 0 });
+  window.addEventListener("resize", () => {
+    gsap.killTweensOf(els.baraatCar);
+    play();
+  });
 }
 
 function initPetals() {

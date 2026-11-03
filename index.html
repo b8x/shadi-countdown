@@ -3,134 +3,114 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#8b1530" />
-    <title>Shadi Baraat · 15 Feb 2027</title>
+    <meta name="theme-color" content="#6b1024" />
+    <title>शुभ विवाह · 15 Feb 2027</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Poppins:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Poppins:wght@400;500;600&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="scene" id="scene" aria-hidden="true">
+    <div class="scene" aria-hidden="true">
       <div class="festive-sky"></div>
-      <div class="rangoli rangoli-a" aria-hidden="true"></div>
-      <div class="rangoli rangoli-b" aria-hidden="true"></div>
-      <canvas id="petals" aria-hidden="true"></canvas>
-      <canvas id="confetti" aria-hidden="true"></canvas>
-      <div class="spark-dust" aria-hidden="true"></div>
+      <div class="scene-king"></div>
+      <div class="rangoli rangoli-a"></div>
+      <div class="rangoli rangoli-b"></div>
+      <canvas id="petals"></canvas>
+      <canvas id="confetti"></canvas>
     </div>
 
-    <div class="fairy-strand fairy-top" aria-hidden="true">
-      <span class="wire"></span>
-      <span class="bulb" style="--i: 0"></span>
-      <span class="bulb" style="--i: 1"></span>
-      <span class="bulb" style="--i: 2"></span>
-      <span class="bulb" style="--i: 3"></span>
-      <span class="bulb" style="--i: 4"></span>
-      <span class="bulb" style="--i: 5"></span>
-      <span class="bulb" style="--i: 6"></span>
-      <span class="bulb" style="--i: 7"></span>
-      <span class="bulb" style="--i: 8"></span>
-      <span class="bulb" style="--i: 9"></span>
-      <span class="bulb" style="--i: 10"></span>
-      <span class="bulb" style="--i: 11"></span>
-      <span class="bulb" style="--i: 12"></span>
-      <span class="bulb" style="--i: 13"></span>
-      <span class="bulb" style="--i: 14"></span>
-      <span class="bulb" style="--i: 15"></span>
+    <div class="mandap-frame" aria-hidden="true">
+      <div class="pillar pillar-l"></div>
+      <div class="pillar pillar-r"></div>
+      <div class="roof">
+        <span class="dome"></span>
+        <span class="kalash">ॐ</span>
+      </div>
+      <div class="fairy-strand">
+        <span class="wire"></span>
+        <span class="bulb" style="--i: 0"></span>
+        <span class="bulb" style="--i: 1"></span>
+        <span class="bulb" style="--i: 2"></span>
+        <span class="bulb" style="--i: 3"></span>
+        <span class="bulb" style="--i: 4"></span>
+        <span class="bulb" style="--i: 5"></span>
+        <span class="bulb" style="--i: 6"></span>
+        <span class="bulb" style="--i: 7"></span>
+        <span class="bulb" style="--i: 8"></span>
+        <span class="bulb" style="--i: 9"></span>
+        <span class="bulb" style="--i: 10"></span>
+        <span class="bulb" style="--i: 11"></span>
+        <span class="bulb" style="--i: 12"></span>
+        <span class="bulb" style="--i: 13"></span>
+      </div>
+      <div class="garland garland-l"></div>
+      <div class="garland garland-r"></div>
     </div>
 
-    <div class="marigold-garland garland-left" aria-hidden="true"></div>
-    <div class="marigold-garland garland-right" aria-hidden="true"></div>
-    <div class="toran" aria-hidden="true">🌼 🪷 🌼 🪷 🌼 🪷 🌼 🪷 🌼</div>
-
-    <button type="button" class="audio-toggle" id="audioToggle" aria-pressed="false" title="Toggle baraat music">
+    <button type="button" class="audio-toggle" id="audioToggle" aria-pressed="false">
       <span class="audio-icon" aria-hidden="true">🔇</span>
-      <span class="audio-label">Tap for music</span>
+      <span class="audio-label">Dhol &amp; Shehnai</span>
     </button>
 
     <main class="page">
-      <header class="hero reveal" style="--d: 0.05s">
-        <p class="eyebrow">
-          <span class="pulse-dot"></span>
-          Baraat incoming
-          <span class="pulse-dot"></span>
-        </p>
-        <h1 class="title">
-          <span class="title-main shimmer-gold">Wedding Squad</span>
-          <span class="title-sub">Shadi Countdown</span>
-        </h1>
-        <p class="date-block">
-          <time datetime="2027-02-15" class="date">15 February 2027</time>
-        </p>
-      </header>
+      <p class="devanagari reveal" style="--d: 0s">शुभ विवाह</p>
 
-      <div class="countdown-shell reveal" style="--d: 0.2s">
-        <div class="shell-border" aria-hidden="true"></div>
-        <section class="countdown" aria-live="polite" aria-label="Countdown to wedding">
-          <div class="unit" data-unit="days">
-            <div class="digit-wrap">
-              <span class="digit" id="days" data-value="00">00</span>
-            </div>
-            <span class="label">Days</span>
+      <div class="stage">
+        <figure class="king-portrait reveal" style="--d: 0.08s">
+          <div class="king-frame">
+            <img src="assets/hero.jpg" alt="Groom seated as a king on a golden throne above the clouds" />
           </div>
-          <span class="sep">:</span>
-          <div class="unit" data-unit="hours">
-            <div class="digit-wrap">
-              <span class="digit" id="hours" data-value="00">00</span>
+          <figcaption>The King</figcaption>
+        </figure>
+
+        <div class="ceremony">
+          <header class="hero reveal" style="--d: 0.12s">
+            <p class="eyebrow"><span></span> Baraat · Save the date <span></span></p>
+            <h1>Wedding <em>Squad</em></h1>
+            <time datetime="2027-02-15">15 February 2027</time>
+          </header>
+
+          <section class="countdown-shell reveal" style="--d: 0.22s" aria-label="Countdown to wedding">
+            <div class="countdown">
+              <div class="unit"><span class="digit" id="days" data-value="00">00</span><span class="label">Days</span></div>
+              <span class="sep">:</span>
+              <div class="unit"><span class="digit" id="hours" data-value="00">00</span><span class="label">Hours</span></div>
+              <span class="sep">:</span>
+              <div class="unit"><span class="digit" id="minutes" data-value="00">00</span><span class="label">Minutes</span></div>
+              <span class="sep">:</span>
+              <div class="unit"><span class="digit pulse" id="seconds" data-value="00">00</span><span class="label">Seconds</span></div>
             </div>
-            <span class="label">Hours</span>
-          </div>
-          <span class="sep">:</span>
-          <div class="unit" data-unit="minutes">
-            <div class="digit-wrap">
-              <span class="digit" id="minutes" data-value="00">00</span>
-            </div>
-            <span class="label">Minutes</span>
-          </div>
-          <span class="sep">:</span>
-          <div class="unit" data-unit="seconds">
-            <div class="digit-wrap pulse-sec">
-              <span class="digit" id="seconds" data-value="00">00</span>
-            </div>
-            <span class="label">Seconds</span>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
 
-      <div class="baraat-stage reveal" style="--d: 0.35s">
-        <div class="road" aria-hidden="true">
-          <span class="road-line"></span>
-        </div>
+      <div class="baraat reveal" style="--d: 0.32s">
+        <div class="road" aria-hidden="true"><span></span></div>
         <div class="lane">
           <div class="car-rig" id="baraatCar">
-            <img
-              src="assets/baraat-car.jpg"
-              alt="Wedding Squad on decorated baraat car — three friends celebrating"
-              width="1024"
-              height="682"
-              decoding="async"
-              fetchpriority="high"
-              draggable="false"
-            />
+            <img src="assets/baraat-car.png" alt="Wedding Squad on a flower-decorated car" draggable="false" />
             <div class="honk-fx" id="honkFx" aria-hidden="true">
-              <span class="honk-text">POON POON!</span>
+              <span class="honk-text">पूं पूं!</span>
               <span class="honk-wave"></span>
-              <span class="honk-wave honk-wave-2"></span>
+              <span class="honk-wave"></span>
             </div>
           </div>
         </div>
-        <p class="stage-caption">Full baraat energy · horns optional · vibes mandatory</p>
       </div>
-
-      <p class="tagline reveal" style="--d: 0.5s">Until we say <em>Qubool Hai</em> 💍</p>
     </main>
 
+    <footer class="wishes reveal" style="--d: 0.45s">
+      <span class="wish-ornament" aria-hidden="true">❀</span>
+      <p>सदा सुखी रहो · A lifetime of laughter, marigolds &amp; music</p>
+      <span class="wish-ornament" aria-hidden="true">❀</span>
+    </footer>
+
     <div class="celebration hidden" id="celebration" role="status">
-      <p class="celebration-text">Shaadi wala din aa gaya!</p>
+      <p>शुभ विवाह!<br />The day is here</p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
