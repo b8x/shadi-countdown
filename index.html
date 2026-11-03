@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#3d1f28" />
+    <title>Shadi · 15 Feb 2027</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="scene" id="scene" aria-hidden="true">
+      <div class="scene-backdrop"></div>
+      <div class="sky"></div>
+      <div class="celestial" id="celestial">
+        <div class="sun-halo"></div>
+        <div class="sun-core"></div>
+        <div class="sun-flare"></div>
+      </div>
+      <div class="aurora"></div>
+      <div class="gradient"></div>
+      <canvas id="clouds" aria-hidden="true"></canvas>
+      <div class="cloud-layer cloud-back">
+        <div class="cloud-puff puff-1"></div>
+        <div class="cloud-puff puff-2"></div>
+        <div class="cloud-puff puff-3"></div>
+      </div>
+      <div class="cloud-layer cloud-mid">
+        <div class="cloud-puff puff-4"></div>
+        <div class="cloud-puff puff-5"></div>
+        <div class="cloud-puff puff-6"></div>
+      </div>
+      <div class="cloud-layer cloud-front">
+        <div class="cloud-puff puff-7"></div>
+        <div class="cloud-puff puff-8"></div>
+      </div>
+      <div class="light-rays"></div>
+      <div class="orb orb-a"></div>
+      <div class="orb orb-b"></div>
+      <div class="orb orb-c"></div>
+      <div class="mist-floor"></div>
+      <div class="shine-veil"></div>
+      <div class="vignette"></div>
+      <div class="grain"></div>
+      <canvas id="sparkles" aria-hidden="true"></canvas>
+      <canvas id="confetti" aria-hidden="true"></canvas>
+    </div>
+
+    <div class="frame-deco" aria-hidden="true">
+      <svg class="corner corner-tl" viewBox="0 0 80 80" fill="none">
+        <path d="M0 40 Q0 0 40 0" stroke="url(#goldGrad)" stroke-width="1" />
+        <path d="M8 40 Q8 8 40 8" stroke="url(#goldGrad)" stroke-width="0.5" opacity="0.5" />
+      </svg>
+      <svg class="corner corner-tr" viewBox="0 0 80 80" fill="none">
+        <path d="M40 0 Q80 0 80 40" stroke="url(#goldGrad)" stroke-width="1" />
+        <path d="M40 8 Q72 8 72 40" stroke="url(#goldGrad)" stroke-width="0.5" opacity="0.5" />
+      </svg>
+      <svg class="corner corner-bl" viewBox="0 0 80 80" fill="none">
+        <path d="M0 40 Q0 80 40 80" stroke="url(#goldGrad)" stroke-width="1" />
+        <path d="M8 40 Q8 72 40 72" stroke="url(#goldGrad)" stroke-width="0.5" opacity="0.5" />
+      </svg>
+      <svg class="corner corner-br" viewBox="0 0 80 80" fill="none">
+        <path d="M40 80 Q80 80 80 40" stroke="url(#goldGrad)" stroke-width="1" />
+        <path d="M40 72 Q72 72 72 40" stroke="url(#goldGrad)" stroke-width="0.5" opacity="0.5" />
+      </svg>
+      <svg width="0" height="0">
+        <defs>
+          <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffe566" />
+            <stop offset="45%" stop-color="#ffd700" />
+            <stop offset="100%" stop-color="#9b1b30" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <main class="page">
+      <div class="layout">
+        <figure class="hero-portrait reveal" style="--d: 0.05s">
+          <div class="portrait-orbit" aria-hidden="true"></div>
+          <div class="portrait-frame">
+            <img
+              src="assets/hero.jpg"
+              alt="Royal celebration above the clouds"
+              width="768"
+              height="1344"
+              decoding="async"
+              fetchpriority="high"
+            />
+            <div class="portrait-shine" aria-hidden="true"></div>
+          </div>
+          <span class="crown-badge" aria-hidden="true">♛</span>
+        </figure>
+
+        <div class="content-column">
+          <header class="hero">
+            <p class="eyebrow reveal" style="--d: 0.15s">
+              <span class="eyebrow-dot"></span>
+              Save the date
+              <span class="eyebrow-dot"></span>
+            </p>
+            <h1 class="title">
+              <span class="title-line reveal" style="--d: 0.22s">Two hearts,</span>
+              <span class="title-line title-accent reveal shimmer-text" style="--d: 0.35s">one celebration</span>
+            </h1>
+            <p class="date-block reveal" style="--d: 0.48s">
+              <time datetime="2027-02-15" class="date">15 February 2027</time>
+            </p>
+          </header>
+
+          <div class="countdown-shell reveal" style="--d: 0.58s">
+        <div class="countdown-glow" aria-hidden="true"></div>
+        <div class="countdown-border" aria-hidden="true"></div>
+        <div class="shine-sweep" aria-hidden="true"></div>
+
+        <section class="countdown" aria-live="polite" aria-label="Countdown to wedding">
+          <div class="unit float" style="--float-delay: 0s" data-unit="days">
+            <div class="digit-wrap">
+              <div class="digit-slot">
+                <span class="digit" id="days" data-value="00">00</span>
+              </div>
+              <div class="digit-glint" aria-hidden="true"></div>
+            </div>
+            <span class="label">Days</span>
+          </div>
+          <span class="sep blink" aria-hidden="true">:</span>
+          <div class="unit float" style="--float-delay: 0.15s" data-unit="hours">
+            <div class="digit-wrap">
+              <div class="digit-slot">
+                <span class="digit" id="hours" data-value="00">00</span>
+              </div>
+              <div class="digit-glint" aria-hidden="true"></div>
+            </div>
+            <span class="label">Hours</span>
+          </div>
+          <span class="sep blink" style="animation-delay: 0.5s" aria-hidden="true">:</span>
+          <div class="unit float" style="--float-delay: 0.3s" data-unit="minutes">
+            <div class="digit-wrap">
+              <div class="digit-slot">
+                <span class="digit" id="minutes" data-value="00">00</span>
+              </div>
+              <div class="digit-glint" aria-hidden="true"></div>
+            </div>
+            <span class="label">Minutes</span>
+          </div>
+          <span class="sep blink" style="animation-delay: 1s" aria-hidden="true">:</span>
+          <div class="unit float" style="--float-delay: 0.45s" data-unit="seconds">
+            <div class="digit-wrap pulse-ring">
+              <div class="digit-slot">
+                <span class="digit" id="seconds" data-value="00">00</span>
+              </div>
+              <div class="digit-glint" aria-hidden="true"></div>
+            </div>
+            <span class="label">Seconds</span>
+          </div>
+        </section>
+
+        <div class="progress-wrap" aria-hidden="true">
+          <svg class="progress-ring" viewBox="0 0 120 120">
+            <circle class="progress-track" cx="60" cy="60" r="54" />
+            <circle class="progress-fill" id="progressRing" cx="60" cy="60" r="54" />
+          </svg>
+        </div>
+          </div>
+
+          <p class="tagline reveal" style="--d: 0.78s">Until we say <em>I do</em></p>
+
+          <footer class="footer reveal" style="--d: 0.92s">
+            <span class="heart-wrap" aria-hidden="true">
+              <span class="heart">♥</span>
+              <span class="heart-ring"></span>
+            </span>
+          </footer>
+        </div>
+      </div>
+    </main>
+
+    <div class="celebration hidden" id="celebration" role="status">
+      <p class="celebration-text">The day is here!</p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
