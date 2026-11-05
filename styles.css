@@ -465,7 +465,7 @@ time {
   top: 46%;
   height: 4px;
   background: repeating-linear-gradient(90deg, rgba(255, 246, 234, 0.92) 0 28px, transparent 28px 52px);
-  animation: drive 0.8s linear infinite;
+  animation: drive 1.5s linear infinite;
 }
 
 @keyframes drive { to { background-position: -52px 0; } }
@@ -524,7 +524,7 @@ time {
   gap: 0.2rem;
   opacity: 0.92;
   filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.7));
-  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), filter 0.35s var(--ease);
+  transition: opacity 0.55s var(--ease), transform 0.55s var(--ease), filter 0.55s var(--ease);
 }
 
 .roadside-spot.side-left {

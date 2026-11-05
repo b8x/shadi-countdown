@@ -221,7 +221,7 @@ function initBaraatAnimation() {
     roadsideSpots.forEach((spot) => {
       const r = spot.getBoundingClientRect();
       const center = r.left + r.width / 2 - laneLeft;
-      const near = Math.abs(center - focusX) < lane.offsetWidth * 0.11;
+      const near = Math.abs(center - focusX) < lane.offsetWidth * 0.16;
       spot.classList.toggle("is-near", near);
       spot.classList.toggle("is-passed", center < focusX - 24 && !near);
     });
@@ -241,18 +241,18 @@ function initBaraatAnimation() {
     gsap.set(els.baraatCar, { x: start, y: 0, xPercent: 0 });
     syncRoadside();
     const tl = gsap.timeline();
-    tl.to(els.baraatCar, { x: center, duration: 3.2, ease: "power3.out", ...onMove })
+    tl.to(els.baraatCar, { x: center, duration: 11, ease: "none", ...onMove })
       .to(els.baraatCar, {
         y: -12,
-        duration: 0.26,
+        duration: 0.35,
         ease: "sine.inOut",
         yoyo: true,
-        repeat: 5,
+        repeat: 3,
       })
       .add(() => playHonk())
-      .to(els.baraatCar, { y: 0, duration: 0.2 })
-      .to({}, { duration: 0.45 })
-      .to(els.baraatCar, { x: end, duration: 2.6, ease: "power2.in", ...onMove })
+      .to(els.baraatCar, { y: 0, duration: 0.25 })
+      .to({}, { duration: 1.4 })
+      .to(els.baraatCar, { x: end, duration: 10, ease: "none", ...onMove })
       .call(play);
   };
 
