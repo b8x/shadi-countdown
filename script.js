@@ -216,7 +216,7 @@ function initBaraatAnimation() {
     const maxShift = Math.max(0, trackW - viewW);
     gsap.set(els.journeyStrip, { x: -progress * maxShift });
 
-    const focusX = lane.offsetWidth * 0.46;
+    const focusX = lane.offsetWidth * 0.5;
     const laneLeft = lane.getBoundingClientRect().left;
     roadsideSpots.forEach((spot) => {
       const r = spot.getBoundingClientRect();

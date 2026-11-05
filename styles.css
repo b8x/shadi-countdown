@@ -449,7 +449,7 @@ time {
   transform: translateX(-50%);
   top: 82%;
   bottom: 0;
-  z-index: 0;
+  z-index: 1;
   background: linear-gradient(180deg, rgba(55, 16, 18, 0.2), rgba(12, 4, 8, 0.82));
   border-top: 3px solid rgba(255, 213, 106, 0.7);
   box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.25);
@@ -490,51 +490,64 @@ time {
   position: absolute;
   left: 0;
   right: 0;
-  top: 0;
-  bottom: 18%;
-  z-index: 1;
+  top: 52%;
+  bottom: 0;
+  z-index: 2;
   overflow: hidden;
   pointer-events: none;
-  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
 }
 
 .roadside-track {
   position: absolute;
   left: 0;
-  bottom: 0;
-  height: 100%;
-  width: max(680%, 2200px);
+  bottom: 22%;
+  height: 78%;
+  width: max(720%, 2600px);
   will-change: transform;
 }
 
 .roadside-spot {
   position: absolute;
-  bottom: 8%;
-  transform: translateX(-50%);
+  bottom: 0;
+  left: var(--x, 50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.18rem;
-  opacity: 0.38;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
+  gap: 0.12rem;
+  opacity: 0.88;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.65));
   transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), filter 0.35s var(--ease);
 }
 
+.roadside-spot.side-left {
+  transform: translateX(calc(-50% - min(11rem, 22vw)));
+}
+
+.roadside-spot.side-right {
+  transform: translateX(calc(-50% + min(11rem, 22vw)));
+}
+
 .roadside-icon {
-  width: clamp(28px, 5.5vw, 42px);
-  height: clamp(28px, 5.5vw, 42px);
+  width: clamp(36px, 6.5vw, 58px);
+  height: clamp(36px, 6.5vw, 58px);
   display: block;
+  filter: drop-shadow(0 0 6px rgba(255, 213, 106, 0.35));
 }
 
 .roadside-label {
-  max-width: 6.5rem;
-  font-size: clamp(0.48rem, 1.5vw, 0.58rem);
+  max-width: 7rem;
+  padding: 0.12rem 0.35rem;
+  border-radius: 6px;
+  background: rgba(61, 7, 22, 0.72);
+  border: 1px solid rgba(255, 213, 106, 0.25);
+  font-size: clamp(0.5rem, 1.35vw, 0.62rem);
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   line-height: 1.15;
   text-align: center;
-  color: #ffe7a3;
-  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.8);
+  color: #fff6ea;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 .roadside-hi {
@@ -546,13 +559,21 @@ time {
 }
 
 .roadside-spot.is-passed {
-  opacity: 0.62;
+  opacity: 0.72;
+}
+
+.roadside-spot.side-left.is-near {
+  transform: translateX(calc(-50% - min(11rem, 22vw))) translateY(-5px) scale(1.12);
+  filter: drop-shadow(0 0 12px rgba(255, 186, 48, 0.85));
+}
+
+.roadside-spot.side-right.is-near {
+  transform: translateX(calc(-50% + min(11rem, 22vw))) translateY(-5px) scale(1.12);
+  filter: drop-shadow(0 0 12px rgba(255, 186, 48, 0.85));
 }
 
 .roadside-spot.is-near {
   opacity: 1;
-  transform: translateX(-50%) translateY(-4px) scale(1.1);
-  filter: drop-shadow(0 0 10px rgba(255, 186, 48, 0.7));
 }
 
 .roadside-temple.is-near .roadside-icon {
@@ -569,7 +590,7 @@ time {
   left: 0;
   height: 100%;
   width: auto;
-  z-index: 3;
+  z-index: 4;
   filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.45));
   will-change: transform;
 }
@@ -808,9 +829,21 @@ time {
   .route-pin-mid { display: none; }
   .roadside-kicker { font-size: 0.46rem; letter-spacing: 0.12em; }
   .roadside-compact { display: none; }
-  .roadside-icon { width: 24px; height: 24px; }
-  .roadside-label { font-size: 0.42rem; max-width: 4.5rem; }
-  .roadside-track { width: max(760%, 1800px); }
+  .roadside-icon { width: 32px; height: 32px; }
+  .roadside-label { font-size: 0.44rem; max-width: 5rem; }
+  .roadside-track { width: max(820%, 2000px); }
+  .roadside-spot.side-left {
+    transform: translateX(calc(-50% - min(4.2rem, 16vw)));
+  }
+  .roadside-spot.side-right {
+    transform: translateX(calc(-50% + min(4.2rem, 16vw)));
+  }
+  .roadside-spot.side-left.is-near {
+    transform: translateX(calc(-50% - min(4.2rem, 16vw))) translateY(-4px) scale(1.08);
+  }
+  .roadside-spot.side-right.is-near {
+    transform: translateX(calc(-50% + min(4.2rem, 16vw))) translateY(-4px) scale(1.08);
+  }
 
   .baraat { flex: 1 1 auto; min-height: 108px; width: 100%; }
   .lane { height: 100%; min-height: 108px; max-height: 180px; }
