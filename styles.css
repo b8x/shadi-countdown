@@ -838,24 +838,32 @@ time {
   .route-pin-mid { display: none; }
   .roadside-kicker { font-size: 0.46rem; letter-spacing: 0.12em; }
   .roadside-compact { display: none; }
-  .roadside-icon { width: 32px; height: 32px; }
-  .roadside-label { font-size: 0.44rem; max-width: 5rem; }
-  .roadside-track { width: max(820%, 2000px); }
+  .roadside-icon {
+    width: clamp(46px, 11vw, 72px);
+    height: clamp(46px, 11vw, 72px);
+  }
+  .roadside-label { font-size: 0.5rem; max-width: 6rem; }
+  .roadside-track { width: max(820%, 2200px); }
   .roadside-spot.side-left {
-    transform: translateX(calc(-50% - min(4.2rem, 16vw)));
+    transform: translateX(calc(-50% - min(5.5rem, 18vw)));
   }
   .roadside-spot.side-right {
-    transform: translateX(calc(-50% + min(4.2rem, 16vw)));
+    transform: translateX(calc(-50% + min(5.5rem, 18vw)));
   }
   .roadside-spot.side-left.is-near {
-    transform: translateX(calc(-50% - min(4.2rem, 16vw))) translateY(-4px) scale(1.08);
+    transform: translateX(calc(-50% - min(5.5rem, 18vw))) translateY(-4px) scale(1.08);
   }
   .roadside-spot.side-right.is-near {
-    transform: translateX(calc(-50% + min(4.2rem, 16vw))) translateY(-4px) scale(1.08);
+    transform: translateX(calc(-50% + min(5.5rem, 18vw))) translateY(-4px) scale(1.08);
   }
 
-  .baraat { flex: 1 1 auto; min-height: 108px; width: 100%; }
-  .lane { height: 100%; min-height: 108px; max-height: 180px; }
+  .baraat { flex: 1 1 auto; min-height: 200px; width: 100%; }
+  .lane {
+    height: min(36dvh, 280px);
+    min-height: 220px;
+    max-height: none;
+    --road-rim: 66%;
+  }
 
   .garland, .pillar { display: none; }
   .roof { left: 8%; right: 8%; }
