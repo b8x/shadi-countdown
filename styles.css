@@ -437,9 +437,12 @@ time {
   position: relative;
   width: 100%;
   flex: 1;
-  min-height: 140px;
+  min-height: 180px;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-end;
+  overflow: visible;
 }
 
 .road {
@@ -447,7 +450,7 @@ time {
   left: 50%;
   width: 100vw;
   transform: translateX(-50%);
-  top: 82%;
+  top: var(--road-rim, 70%);
   bottom: 0;
   z-index: 1;
   background: linear-gradient(180deg, rgba(55, 16, 18, 0.2), rgba(12, 4, 8, 0.82));
@@ -470,40 +473,42 @@ time {
 .lane {
   position: relative;
   width: 100%;
-  height: min(34dvh, 280px);
-  overflow: hidden;
+  height: min(42dvh, 360px);
+  --road-rim: 70%;
+  overflow-x: clip;
+  overflow-y: visible;
   z-index: 1;
 }
 
 .roadside-kicker {
   width: 100%;
-  margin: 0 0 0.15rem;
+  margin: 0 0 0.25rem;
   text-align: center;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-size: 0.52rem;
   color: #ff9a2f;
   opacity: 0.9;
+  flex-shrink: 0;
 }
 
 .roadside-view {
   position: absolute;
   left: 0;
   right: 0;
-  top: 52%;
-  bottom: 0;
+  top: 0;
+  height: var(--road-rim);
   z-index: 2;
-  overflow: hidden;
+  overflow: visible;
   pointer-events: none;
-  mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
 }
 
 .roadside-track {
   position: absolute;
   left: 0;
-  bottom: 22%;
-  height: 78%;
-  width: max(720%, 2600px);
+  bottom: 0;
+  height: 100%;
+  width: max(760%, 2800px);
   will-change: transform;
 }
 
@@ -511,43 +516,47 @@ time {
   position: absolute;
   bottom: 0;
   left: var(--x, 50%);
+  max-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.12rem;
-  opacity: 0.88;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.65));
+  justify-content: flex-end;
+  gap: 0.2rem;
+  opacity: 0.92;
+  filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.7));
   transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), filter 0.35s var(--ease);
 }
 
 .roadside-spot.side-left {
-  transform: translateX(calc(-50% - min(11rem, 22vw)));
+  transform: translateX(calc(-50% - min(13rem, 24vw)));
 }
 
 .roadside-spot.side-right {
-  transform: translateX(calc(-50% + min(11rem, 22vw)));
+  transform: translateX(calc(-50% + min(13rem, 24vw)));
 }
 
 .roadside-icon {
-  width: clamp(36px, 6.5vw, 58px);
-  height: clamp(36px, 6.5vw, 58px);
+  width: clamp(52px, 9vw, 86px);
+  height: clamp(52px, 9vw, 86px);
   display: block;
-  filter: drop-shadow(0 0 6px rgba(255, 213, 106, 0.35));
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 10px rgba(255, 213, 106, 0.45));
 }
 
 .roadside-label {
-  max-width: 7rem;
-  padding: 0.12rem 0.35rem;
-  border-radius: 6px;
-  background: rgba(61, 7, 22, 0.72);
-  border: 1px solid rgba(255, 213, 106, 0.25);
-  font-size: clamp(0.5rem, 1.35vw, 0.62rem);
+  max-width: 8.5rem;
+  padding: 0.18rem 0.45rem;
+  border-radius: 8px;
+  background: rgba(61, 7, 22, 0.85);
+  border: 1px solid rgba(255, 213, 106, 0.35);
+  font-size: clamp(0.58rem, 1.5vw, 0.72rem);
   font-weight: 600;
   letter-spacing: 0.03em;
-  line-height: 1.15;
+  line-height: 1.2;
   text-align: center;
   color: #fff6ea;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  flex-shrink: 0;
 }
 
 .roadside-hi {
@@ -563,13 +572,13 @@ time {
 }
 
 .roadside-spot.side-left.is-near {
-  transform: translateX(calc(-50% - min(11rem, 22vw))) translateY(-5px) scale(1.12);
-  filter: drop-shadow(0 0 12px rgba(255, 186, 48, 0.85));
+  transform: translateX(calc(-50% - min(13rem, 24vw))) translateY(-6px) scale(1.1);
+  filter: drop-shadow(0 0 14px rgba(255, 186, 48, 0.9));
 }
 
 .roadside-spot.side-right.is-near {
-  transform: translateX(calc(-50% + min(11rem, 22vw))) translateY(-5px) scale(1.12);
-  filter: drop-shadow(0 0 12px rgba(255, 186, 48, 0.85));
+  transform: translateX(calc(-50% + min(13rem, 24vw))) translateY(-6px) scale(1.1);
+  filter: drop-shadow(0 0 14px rgba(255, 186, 48, 0.9));
 }
 
 .roadside-spot.is-near {
@@ -765,7 +774,7 @@ time {
   .groom-frame { height: min(40dvh, 360px); }
   .unit { min-width: 3.5rem; }
   .digit { font-size: clamp(1.7rem, 4.4vw, 2.7rem); padding: 0.4rem 0.28rem; }
-  .lane { height: min(28dvh, 220px); }
+  .lane { height: min(38dvh, 320px); --road-rim: 68%; }
   .route-stage { height: min(18dvh, 140px); width: min(100%, calc(min(18dvh, 140px) * 960 / 520)); }
 }
 
@@ -898,6 +907,6 @@ time {
   .groom-frame { height: min(52dvh, 210px); width: 100%; }
   .route-pin-mid { display: none; }
   .route-stage { height: min(22dvh, 110px); }
-  .lane { height: min(26dvh, 130px); max-height: none; }
+  .lane { height: min(32dvh, 200px); --road-rim: 65%; }
   .baraat { min-height: 0; }
 }
