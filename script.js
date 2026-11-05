@@ -9,6 +9,7 @@ const els = {
   baraatCar: document.getElementById("baraatCar"),
   honkFx: document.getElementById("honkFx"),
   audioToggle: document.getElementById("audioToggle"),
+  journeyStrip: document.getElementById("journeyStrip"),
 };
 
 const CONFETTI_COLORS = [
@@ -193,6 +194,7 @@ function initBaraatAnimation() {
   if (!els.baraatCar || !window.gsap) return;
 
   const lane = els.baraatCar.parentElement;
+  const roadsideSpots = [...document.querySelectorAll(".roadside-spot")];
 
   function positions() {
     const carW = els.baraatCar.offsetWidth;
@@ -204,17 +206,42 @@ function initBaraatAnimation() {
     };
   }
 
+  function syncRoadside() {
+    if (!els.journeyStrip || !lane) return;
+    const { start, end } = positions();
+    const carX = gsap.getProperty(els.baraatCar, "x");
+    const progress = gsap.utils.clamp(0, 1, (carX - start) / (end - start));
+    const trackW = els.journeyStrip.offsetWidth;
+    const viewW = lane.offsetWidth;
+    const maxShift = Math.max(0, trackW - viewW);
+    gsap.set(els.journeyStrip, { x: -progress * maxShift });
+
+    const focusX = lane.offsetWidth * 0.46;
+    const laneLeft = lane.getBoundingClientRect().left;
+    roadsideSpots.forEach((spot) => {
+      const r = spot.getBoundingClientRect();
+      const center = r.left + r.width / 2 - laneLeft;
+      const near = Math.abs(center - focusX) < lane.offsetWidth * 0.11;
+      spot.classList.toggle("is-near", near);
+      spot.classList.toggle("is-passed", center < focusX - 24 && !near);
+    });
+  }
+
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     const { center } = positions();
     gsap.set(els.baraatCar, { x: center, y: 0, xPercent: 0 });
+    roadsideSpots.forEach((spot) => spot.classList.add("is-passed"));
     return;
   }
+
+  const onMove = { onUpdate: syncRoadside };
 
   const play = () => {
     const { start, center, end } = positions();
     gsap.set(els.baraatCar, { x: start, y: 0, xPercent: 0 });
+    syncRoadside();
     const tl = gsap.timeline();
-    tl.to(els.baraatCar, { x: center, duration: 3.2, ease: "power3.out" })
+    tl.to(els.baraatCar, { x: center, duration: 3.2, ease: "power3.out", ...onMove })
       .to(els.baraatCar, {
         y: -12,
         duration: 0.26,
@@ -225,7 +252,7 @@ function initBaraatAnimation() {
       .add(() => playHonk())
       .to(els.baraatCar, { y: 0, duration: 0.2 })
       .to({}, { duration: 0.45 })
-      .to(els.baraatCar, { x: end, duration: 2.6, ease: "power2.in" })
+      .to(els.baraatCar, { x: end, duration: 2.6, ease: "power2.in", ...onMove })
       .call(play);
   };
 

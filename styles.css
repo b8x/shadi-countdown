@@ -475,13 +475,101 @@ time {
   z-index: 1;
 }
 
+.roadside-kicker {
+  width: 100%;
+  margin: 0 0 0.15rem;
+  text-align: center;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.52rem;
+  color: #ff9a2f;
+  opacity: 0.9;
+}
+
+.roadside-view {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 18%;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+
+.roadside-track {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  width: max(680%, 2200px);
+  will-change: transform;
+}
+
+.roadside-spot {
+  position: absolute;
+  bottom: 8%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.18rem;
+  opacity: 0.38;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), filter 0.35s var(--ease);
+}
+
+.roadside-icon {
+  width: clamp(28px, 5.5vw, 42px);
+  height: clamp(28px, 5.5vw, 42px);
+  display: block;
+}
+
+.roadside-label {
+  max-width: 6.5rem;
+  font-size: clamp(0.48rem, 1.5vw, 0.58rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  text-align: center;
+  color: #ffe7a3;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.8);
+}
+
+.roadside-hi {
+  display: block;
+  font-family: var(--dev);
+  font-weight: 400;
+  font-size: 0.54rem;
+  color: #ffd56a;
+}
+
+.roadside-spot.is-passed {
+  opacity: 0.62;
+}
+
+.roadside-spot.is-near {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px) scale(1.1);
+  filter: drop-shadow(0 0 10px rgba(255, 186, 48, 0.7));
+}
+
+.roadside-temple.is-near .roadside-icon {
+  animation: diya-glow 1.2s ease-in-out infinite;
+}
+
+@keyframes diya-glow {
+  50% { filter: brightness(1.25); }
+}
+
 .car-rig {
   position: absolute;
   bottom: 0;
   left: 0;
   height: 100%;
   width: auto;
-  z-index: 2;
+  z-index: 3;
   filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.45));
   will-change: transform;
 }
@@ -565,6 +653,7 @@ time {
   #petals, #confetti { display: none; }
   .car-rig { left: 50% !important; transform: translateX(-50%) !important; }
   .route-landmark-temple.is-near .route-landmark-icon { filter: none; }
+  .roadside-temple.is-near .roadside-icon { filter: none; }
 }
 
 .route-inline {
@@ -593,79 +682,7 @@ time {
   height: min(22dvh, 168px);
   width: min(100%, calc(min(22dvh, 168px) * 960 / 520));
   margin: 0 auto;
-  overflow: visible;
 }
-
-.route-landmark-sprite {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-}
-
-.route-landmarks {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.route-landmark {
-  position: absolute;
-  transform: translate(-50%, -100%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.12rem;
-  opacity: 0.42;
-  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.45));
-  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), filter 0.35s var(--ease);
-}
-
-.route-landmark-icon {
-  width: clamp(22px, 4.2vw, 30px);
-  height: clamp(22px, 4.2vw, 30px);
-  display: block;
-}
-
-.route-landmark-label {
-  max-width: 5.5rem;
-  font-size: 0.46rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  line-height: 1.15;
-  text-align: center;
-  color: #ffe7a3;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75);
-}
-
-.route-landmark-hi {
-  display: block;
-  font-family: var(--dev);
-  font-weight: 400;
-  font-size: 0.5rem;
-  color: #ffd56a;
-}
-
-.route-landmark.is-passed {
-  opacity: 0.72;
-}
-
-.route-landmark.is-near {
-  opacity: 1;
-  transform: translate(-50%, calc(-100% - 2px)) scale(1.08);
-  filter: drop-shadow(0 0 8px rgba(255, 186, 48, 0.65));
-}
-
-.route-landmark-temple.is-near .route-landmark-icon {
-  animation: diya-glow 1.2s ease-in-out infinite;
-}
-
-@keyframes diya-glow {
-  50% { filter: brightness(1.25); }
-}
-
-.route-pin-ujjain { color: #ffd56a; }
 
 #routeLottie {
   position: relative;
@@ -695,6 +712,13 @@ time {
 .route-pin-end { color: #ffd56a; }
 
 .route-pin-above { transform: translate(-10%, -130%); }
+
+.landmark-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
 
 .cracker {
   position: fixed;
@@ -781,12 +805,12 @@ time {
     width: min(100%, calc(min(15dvh, 118px) * 960 / 520));
   }
   .route-pin { font-size: 0.56rem; }
-  .route-pin-mid:not(.route-pin-ujjain) { display: none; }
-  .route-landmark-compact,
-  .route-landmark-shipra,
-  .route-landmark[data-frame="2"] { display: none; }
-  .route-landmark-label { font-size: 0.4rem; max-width: 4.2rem; }
-  .route-landmark-icon { width: 20px; height: 20px; }
+  .route-pin-mid { display: none; }
+  .roadside-kicker { font-size: 0.46rem; letter-spacing: 0.12em; }
+  .roadside-compact { display: none; }
+  .roadside-icon { width: 24px; height: 24px; }
+  .roadside-label { font-size: 0.42rem; max-width: 4.5rem; }
+  .roadside-track { width: max(760%, 1800px); }
 
   .baraat { flex: 1 1 auto; min-height: 108px; width: 100%; }
   .lane { height: 100%; min-height: 108px; max-height: 180px; }
@@ -839,8 +863,7 @@ time {
   .countdown-shell,
   .route-inline { order: initial; width: auto; }
   .groom-frame { height: min(52dvh, 210px); width: 100%; }
-  .route-pin-mid:not(.route-pin-ujjain) { display: none; }
-  .route-landmark-compact { display: none; }
+  .route-pin-mid { display: none; }
   .route-stage { height: min(22dvh, 110px); }
   .lane { height: min(26dvh, 130px); max-height: none; }
   .baraat { min-height: 0; }
