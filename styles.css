@@ -475,8 +475,8 @@ time {
 .lane {
   position: relative;
   width: 100%;
-  height: min(42dvh, 360px);
-  --road-rim: 62%;
+  height: min(44dvh, 380px);
+  --road-rim: 70%;
   overflow-x: clip;
   overflow-y: visible;
   z-index: 1;
@@ -492,15 +492,8 @@ time {
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 28%);
-  mask-image: linear-gradient(180deg, transparent 0%, #000 28%);
-}
-
-.street-scene::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(107, 16, 36, 0.55) 0%, rgba(107, 16, 36, 0.12) 60%, rgba(40, 6, 14, 0.2) 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 4%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 4%);
 }
 
 .street-scene-strip {
@@ -508,14 +501,14 @@ time {
   left: 0;
   bottom: 0;
   height: 100%;
-  aspect-ratio: 5920 / 290;
-  background: url("assets/street-tile.jpg") repeat-x left bottom / auto 100%;
+  aspect-ratio: 7200 / 400;
+  background: url("assets/places-street.svg") repeat-x left bottom / auto 100%;
   will-change: transform;
-  animation: street-scroll 40s linear infinite;
+  animation: street-scroll 60s linear infinite;
 }
 
 @keyframes street-scroll {
-  to { transform: translateX(-25%); }
+  to { transform: translateX(-33.3333%); }
 }
 
 .roadside-kicker {
@@ -528,95 +521,6 @@ time {
   color: #ff9a2f;
   opacity: 0.9;
   flex-shrink: 0;
-}
-
-.roadside-view {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: var(--road-rim);
-  z-index: 2;
-  overflow: visible;
-  pointer-events: none;
-}
-
-.roadside-track {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 100%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: clamp(1px, 0.35vw, 6px);
-  padding: 0 clamp(2px, 0.6vw, 8px) clamp(4px, 0.8vh, 10px);
-  box-sizing: border-box;
-}
-
-.roadside-spot {
-  position: relative;
-  z-index: 5;
-  flex: 1 1 0;
-  min-width: 0;
-  max-width: 12.5%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.2rem;
-  opacity: 1;
-  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.85));
-}
-
-.roadside-spot.side-left {
-  padding-bottom: 0.25rem;
-}
-
-.roadside-spot.side-right {
-  padding-bottom: 0.65rem;
-}
-
-.roadside-icon {
-  width: clamp(72px, 11vmin, 118px);
-  height: clamp(72px, 11vmin, 118px);
-  display: block;
-  flex-shrink: 0;
-  filter: drop-shadow(0 0 14px rgba(255, 213, 106, 0.65));
-}
-
-.roadside-label {
-  max-width: 100%;
-  padding: 0.28rem 0.42rem;
-  border-radius: 8px;
-  background: rgba(45, 5, 16, 0.96);
-  border: 1px solid rgba(255, 213, 106, 0.55);
-  font-size: clamp(0.52rem, 1.35vw, 0.72rem);
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  line-height: 1.15;
-  text-align: center;
-  color: #fff6ea;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75);
-  flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
-}
-
-.roadside-hi {
-  display: block;
-  font-family: var(--dev);
-  font-weight: 400;
-  font-size: 0.58rem;
-  color: #ffd56a;
-}
-
-.roadside-temple .roadside-icon {
-  animation: diya-glow 2.4s ease-in-out infinite;
-}
-
-@keyframes diya-glow {
-  50% { filter: brightness(1.25); }
 }
 
 .car-rig {
@@ -708,8 +612,6 @@ time {
   }
   #petals, #confetti { display: none; }
   .car-rig { left: 50% !important; transform: translateX(-50%) !important; }
-  .route-landmark-temple.is-near .route-landmark-icon { filter: none; }
-  .roadside-temple .roadside-icon { animation: none; }
 }
 
 .route-inline {
@@ -768,13 +670,6 @@ time {
 .route-pin-end { color: #ffd56a; }
 
 .route-pin-above { transform: translate(-10%, -130%); }
-
-.landmark-sprite {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-}
 
 .cracker {
   position: fixed;
@@ -863,27 +758,13 @@ time {
   .route-pin { font-size: 0.56rem; }
   .route-pin-mid { display: none; }
   .roadside-kicker { font-size: 0.46rem; letter-spacing: 0.12em; }
-  .roadside-icon {
-    width: clamp(52px, 9vmin, 88px);
-    height: clamp(52px, 9vmin, 88px);
-  }
-  .roadside-label {
-    width: max-content;
-    max-width: 4.6rem;
-    font-size: clamp(0.46rem, 2.6vw, 0.54rem);
-    padding: 0.18rem 0.3rem;
-  }
-  .roadside-spot:first-child .roadside-label { align-self: flex-start; }
-  .roadside-spot:last-child .roadside-label { align-self: flex-end; }
-  .roadside-spot.side-right .roadside-label { transform: translateY(-1.6rem); }
-  .roadside-hi { font-size: 0.48rem; }
 
   .baraat { flex: 1 1 auto; min-height: 200px; width: 100%; }
   .lane {
     height: min(36dvh, 280px);
     min-height: 220px;
     max-height: none;
-    --road-rim: 60%;
+    --road-rim: 66%;
   }
 
   .garland, .pillar { display: none; }
