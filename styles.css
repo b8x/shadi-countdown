@@ -564,6 +564,7 @@ time {
   }
   #petals, #confetti { display: none; }
   .car-rig { left: 50% !important; transform: translateX(-50%) !important; }
+  .route-landmark-temple.is-near .route-landmark-icon { filter: none; }
 }
 
 .route-inline {
@@ -592,6 +593,83 @@ time {
   height: min(22dvh, 168px);
   width: min(100%, calc(min(22dvh, 168px) * 960 / 520));
   margin: 0 auto;
+  overflow: visible;
+}
+
+.route-landmark-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.route-landmarks {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.route-landmark {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.12rem;
+  opacity: 0.42;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.45));
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), filter 0.35s var(--ease);
+}
+
+.route-landmark-icon {
+  width: clamp(22px, 4.2vw, 30px);
+  height: clamp(22px, 4.2vw, 30px);
+  display: block;
+}
+
+.route-landmark-label {
+  max-width: 5.5rem;
+  font-size: 0.46rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  line-height: 1.15;
+  text-align: center;
+  color: #ffe7a3;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75);
+}
+
+.route-landmark-hi {
+  display: block;
+  font-family: var(--dev);
+  font-weight: 400;
+  font-size: 0.5rem;
+  color: #ffd56a;
+}
+
+.route-landmark.is-passed {
+  opacity: 0.72;
+}
+
+.route-landmark.is-near {
+  opacity: 1;
+  transform: translate(-50%, calc(-100% - 2px)) scale(1.08);
+  filter: drop-shadow(0 0 8px rgba(255, 186, 48, 0.65));
+}
+
+.route-landmark-temple.is-near .route-landmark-icon {
+  animation: diya-glow 1.2s ease-in-out infinite;
+}
+
+@keyframes diya-glow {
+  50% { filter: brightness(1.25); }
+}
+
+.route-pin-ujjain { color: #ffd56a; }
+
+#routeLottie {
+  position: relative;
+  z-index: 0;
 }
 
 #routeLottie,
@@ -603,6 +681,7 @@ time {
 
 .route-pin {
   position: absolute;
+  z-index: 3;
   transform: translate(-50%, 8px);
   font-size: 0.68rem;
   font-weight: 600;
@@ -702,7 +781,12 @@ time {
     width: min(100%, calc(min(15dvh, 118px) * 960 / 520));
   }
   .route-pin { font-size: 0.56rem; }
-  .route-pin-mid { display: none; }
+  .route-pin-mid:not(.route-pin-ujjain) { display: none; }
+  .route-landmark-compact,
+  .route-landmark-shipra,
+  .route-landmark[data-frame="2"] { display: none; }
+  .route-landmark-label { font-size: 0.4rem; max-width: 4.2rem; }
+  .route-landmark-icon { width: 20px; height: 20px; }
 
   .baraat { flex: 1 1 auto; min-height: 108px; width: 100%; }
   .lane { height: 100%; min-height: 108px; max-height: 180px; }
@@ -755,7 +839,8 @@ time {
   .countdown-shell,
   .route-inline { order: initial; width: auto; }
   .groom-frame { height: min(52dvh, 210px); width: 100%; }
-  .route-pin-mid { display: none; }
+  .route-pin-mid:not(.route-pin-ujjain) { display: none; }
+  .route-landmark-compact { display: none; }
   .route-stage { height: min(22dvh, 110px); }
   .lane { height: min(26dvh, 130px); max-height: none; }
   .baraat { min-height: 0; }
